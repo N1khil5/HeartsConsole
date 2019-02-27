@@ -52,7 +52,7 @@ public class Hearts extends Application {
         root.setAlignment(Pos.CENTER);
       
         //background image
-        InputStream is = Files.newInputStream(Paths.get("res/images/hearts bg1.jpg"));
+        InputStream is = Files.newInputStream(Paths.get("images/hearts bg1.jpg"));
         Image img = new Image(is);
         is.close();
         ImageView imgView = new ImageView(img);

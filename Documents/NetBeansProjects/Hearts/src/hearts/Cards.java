@@ -8,6 +8,8 @@ package hearts;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Random;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javax.imageio.ImageIO;
@@ -37,7 +39,19 @@ public class Cards extends Object implements Constants {
 
     public static void main(String[] args) throws IOException {
 
-        String[] Deck = {"2C", "2D", "2H", "2S", "3C", "3D", "3H", "3S", "4C", "4D", "4H", "4S", "5C", "5D", "5H", "5S", "6C", "6D", "6H", "6S", "7C", "7D", "7H", "7S", "8C", "8D", "8H", "8S", "9C", "9D", "9H", "9S", "1C", "1D", "1H", "1S", "AC", "AD", "AH", "AS", "JC", "JD", "JH", "JS", "QC", "QD", "QH", "QS", "KC", "KD", "KH", "KS"};
+        String[] Deck = {"2C", "2D", "2H", "2S", 
+            "3C", "3D", "3H", "3S",
+            "4C", "4D", "4H", "4S", 
+            "5C", "5D", "5H", "5S", 
+            "6C", "6D", "6H", "6S", 
+            "7C", "7D", "7H", "7S", 
+            "8C", "8D", "8H", "8S", 
+            "9C", "9D", "9H", "9S", 
+            "1C", "1D", "1H", "1S", 
+            "AC", "AD", "AH", "AS", 
+            "JC", "JD", "JH", "JS", 
+            "QC", "QD", "QH", "QS", 
+            "KC", "KD", "KH", "KS"};
         BufferedImage[] cardImages = new BufferedImage[52];
         Cards[] cards = new Cards[52];
         for (int i = 0; i < Deck.length; i++) {
@@ -45,18 +59,6 @@ public class Cards extends Object implements Constants {
             cards[i] = makeCard(Deck[i], cardImages[i]);
             System.out.print(cards[i].toAString());
         }
-
-/*        for (int i = 0;i<Deck.length;i++)
-//        {
-//            if(Deck[i].startsWith("2"))
-//            {
-//                if(Deck[i].endsWith("C"))
-//                {
-//                    BufferedImage Image = ImageIO.read(new File("../Hearts/cards/" + Deck[i] + ".png"));
-//                    Cards TwoClubs = new Cards("Two","Clubs",2,Image);
-//                    System.out.print(TwoClubs.toAString());
-//                }
-*/
     }
 
     public static BufferedImage makeImage(String name) throws IOException {
@@ -160,8 +162,8 @@ public class Cards extends Object implements Constants {
                 return "o";
         }
     }
-    
-    public static String getVal(String num){
+
+    public static String getVal(String num) {
         switch (num) {
             case "1":
                 return "10";
@@ -181,17 +183,45 @@ public class Cards extends Object implements Constants {
                 return "8";
             case "9":
                 return "9";
-            case "A":
-                return "14";
             case "J":
                 return "11";
             case "Q":
                 return "12";
             case "K":
                 return "13";
+            case "A":
+                return "14";
             default:
                 break;
         }
         return "o";
-}
+    }
+    
+    public static void shuffle(String cards[])
+    {
+        int n = cards.length;
+        Random random = new Random();
+        
+        for(int i=0;i<cards.length;i++)
+        {
+            int randomValue = i + random.nextInt(n-i);
+            String randomElement = cards[randomValue];
+            cards[randomValue] = cards[i];
+            cards[i] = randomElement;
+        }
+    }
+    
+    public static void deal(String cards[])
+    {
+        //This would be done when the clients are added to send to each one.
+        //Once player class has been added, add these to individual client.
+        for(int i =0; i<4;i++)
+        {
+            System.out.println("Person " + (i +1) + " ");
+            for (int j = 0; i < 13; j++)
+            {
+                System.out.println(cards[i]);
+            }
+        }
+    }
 }

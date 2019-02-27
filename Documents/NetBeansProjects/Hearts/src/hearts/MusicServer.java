@@ -34,7 +34,7 @@ public class MusicServer implements Constants {
             String topDirectory = currentPath.substring(0, currentPath.indexOf("Hearts"));
             String filePath = topDirectory + "Hearts/" + musicFilePath;
             musicHandler.loadData(filePath);
-
+            
             //Create a new context and handler for this context
             httpServer.createContext(httpContext, musicHandler);
 
