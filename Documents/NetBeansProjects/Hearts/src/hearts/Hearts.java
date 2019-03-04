@@ -183,6 +183,8 @@ public class Hearts extends Application {
             Button enter = new Button("Enter");
                  enter.setOnAction(action -> {
                  System.out.println(IP.getText());
+                 //Send name of user to server
+                 //print name here as well
                  });
 
             //main menu
