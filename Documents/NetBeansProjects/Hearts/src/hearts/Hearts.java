@@ -199,7 +199,7 @@ public class Hearts extends Application {
             Button enter = new Button("Enter");
                  enter.setOnAction(action -> {
                  System.out.println(IP.getText());
-                 System.out.println( Name + " has connected");
+                 System.out.println( Name.getText() + " has connected");
                  //Send name of user to server
                  //print name here as well
                  });
