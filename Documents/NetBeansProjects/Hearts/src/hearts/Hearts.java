@@ -34,11 +34,16 @@ import javafx.stage.Stage;
 import java.io.DataInputStream;
 import java.io.PrintStream;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -51,7 +56,7 @@ public class Hearts extends Application {
     private Menu Menu;
     String portNumber = "8000";
         // The default host.
-    String host = "10.2.147.44";
+    String host = "10.2.199.46";
     
         // The client socket
     private static Socket clientSocket = null;
@@ -167,14 +172,25 @@ public class Hearts extends Application {
             rules.setFont(Font.font("Cambria", 20));
             
             //Add rule document from file.
-            Label ruleText = new Label ("rules/rules.txt");
+            try {
+            BufferedReader br = new BufferedReader(new FileReader(new File("..//rules/rules.txt")));
+            String rule = "";
+            while((rule=br.readLine())!=null){
+                rule += br.readLine();
+            }
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Hearts.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Hearts.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Label ruleText = new Label (WORDS);
             ruleText.setWrapText(true);
-            ruleText.setTextFill(Color.web("#FFFFFF"));
+            ruleText.setTextFill(Color.web("#000000"));
             rules.setFont(Font.font("Cambria",10));
             
-            TextField IP = new TextField(host);
+            Label IP = new Label(host);
             
-            TextField Port = new TextField(portNumber);
+            Label Port = new Label(portNumber);
             
             TextField Name = new TextField("Enter player name");
             
@@ -183,6 +199,7 @@ public class Hearts extends Application {
             Button enter = new Button("Enter");
                  enter.setOnAction(action -> {
                  System.out.println(IP.getText());
+                 System.out.println( Name + " has connected");
                  //Send name of user to server
                  //print name here as well
                  });
@@ -232,7 +249,7 @@ public class Hearts extends Application {
             "the player who wins the trick leads the next one with any card except for Hearts." + 
             "If another player who is not leading the trick cannot follow suit," + 
             "they can break the trick with any hearts card." + 
-            " For example, if the player leading the trick plays ‘9♣’, the next user plays ‘6♣’ " + 
+            " For example, if the player leading the trick plays ‘9♣’ and the next user plays ‘6♣’ " + 
             "and if the third player cannot follow suit (does not have a ♣ clubs card to continue the trick)," + 
             " they can play a card from any suit, even a Hearts ♥ card." +
             "Shoot the moon: If at the end of the round, a player collects all the point value cards (All the ♥ cards and the Q♠)," + 
@@ -283,7 +300,7 @@ public class Hearts extends Application {
                 // The default port.
         int portNumber = 8000;
         // The default host.
-        String host = "10.2.147.44";
+        String host = "10.2.199.46";
 
         if (args.length < 2) {
             System.out.println("Usage: java MultiThreadChatClient <host> <portNumber>\n" + "Now using host=" + host + ", portNumber=" + portNumber);
