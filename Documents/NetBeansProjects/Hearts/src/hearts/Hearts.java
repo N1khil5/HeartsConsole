@@ -54,9 +54,9 @@ public class Hearts extends Application implements Runnable {
     Stage window;
     Scene scene, scene2;
     private Menu Menu;
-    String portNumber = "2000";
+    int portNumber = 2000;
     // The default host.
-    String host = "10.2.199.36";
+    String host = "10.2.199.61";
 
     // The client socket
     private static Socket clientSocket = null;
@@ -290,24 +290,24 @@ public class Hearts extends Application implements Runnable {
 
     public static void main(String[] args) {
         launch(args);
-        //If everything has been initialized then we want to write some data to the socket we have opened a connection to on the port portNumber.
-        if (clientSocket != null && os != null && is != null) {
-            try {
-
-                // Create a thread to read from the server. 
-                new Thread((Runnable) new Hearts()).start();
-                while (!closed) {
-                    os.println(inputLine.readLine().trim());
-                }
-                //Close the output stream, close the input stream, close the socket.
-
-                os.close();
-                is.close();
-                clientSocket.close();
-            } catch (IOException e) {
-                System.err.println("IOException:  " + e);
-            }
-        }
+//        //If everything has been initialized then we want to write some data to the socket we have opened a connection to on the port portNumber.
+//        if (clientSocket != null && os != null && is != null) {
+//            try {
+//
+//                // Create a thread to read from the server. 
+//                new Thread((Runnable) new Hearts()).start();
+//                while (!closed) {
+//                    os.println(inputLine.readLine().trim());
+//                }
+//                //Close the output stream, close the input stream, close the socket.
+//
+//                os.close();
+//                is.close();
+//                clientSocket.close();
+//            } catch (IOException e) {
+//                System.err.println("IOException:  " + e);
+//            }
+//        }
     }
 
     //Create a thread to read from the server. 
@@ -332,11 +332,11 @@ public class Hearts extends Application implements Runnable {
         // The default port.
         int portNumber = 2000;
         // The default host.
-        String host = "100.2.199.36";
+        String host = "10.2.199.61";
         //Open a socket on a given host and port. Open input and output streams.
         try {
             clientSocket = new Socket(InetAddress.getByName(host), portNumber);
-            inputLine = new BufferedReader(new InputStreamReader(System.in));
+            //inputLine = new BufferedReader(new InputStreamReader(System.in));
             os = new PrintStream(clientSocket.getOutputStream());
             is = new DataInputStream(clientSocket.getInputStream());
         } catch (UnknownHostException e) {
@@ -347,22 +347,22 @@ public class Hearts extends Application implements Runnable {
         }
 
         //If everything has been initialized then we want to write some data to the socket we have opened a connection to on the port portNumber.
-        if (clientSocket != null && os != null && is != null) {
-            try {
-
-                // Create a thread to read from the server. 
-                new Thread(new Hearts()).start();
-                while (!closed) {
-                    os.println(inputLine.readLine().trim());
-                }
-                //Close the output stream, close the input stream, close the socket.
-
-                os.close();
-                is.close();
-                clientSocket.close();
-            } catch (IOException e) {
-                System.err.println("IOException:  " + e);
-            }
-        }
+//        if (clientSocket != null && os != null && is != null) {
+//            try {
+//
+//                // Create a thread to read from the server. 
+//                new Thread(new Hearts()).start();
+//                while (!closed) {
+//                    os.println(inputLine.readLine().trim());
+//                }
+//                //Close the output stream, close the input stream, close the socket.
+//
+//                os.close();
+//                is.close();
+//                clientSocket.close();
+//            } catch (IOException e) {
+//                System.err.println("IOException:  " + e);
+//            }
+//        }
     }
 }
