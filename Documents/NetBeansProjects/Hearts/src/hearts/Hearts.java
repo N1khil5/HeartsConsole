@@ -56,7 +56,7 @@ public class Hearts extends Application implements Runnable {
     private Menu Menu;
     int portNumber = 2000;
     // The default host.
-    String host = "10.2.199.61";
+    String host = "10.2.163.59";
 
     // The client socket
     private static Socket clientSocket = null;
@@ -289,6 +289,8 @@ public class Hearts extends Application implements Runnable {
     }
 
     public static void main(String[] args) {
+        MusicClientThread musicClientThread = new MusicClientThread();
+        musicClientThread.start();        
         launch(args);
 //        //If everything has been initialized then we want to write some data to the socket we have opened a connection to on the port portNumber.
 //        if (clientSocket != null && os != null && is != null) {
@@ -332,7 +334,7 @@ public class Hearts extends Application implements Runnable {
         // The default port.
         int portNumber = 2000;
         // The default host.
-        String host = "10.2.199.61";
+        String host = "10.2.163.59";
         //Open a socket on a given host and port. Open input and output streams.
         try {
             clientSocket = new Socket(InetAddress.getByName(host), portNumber);

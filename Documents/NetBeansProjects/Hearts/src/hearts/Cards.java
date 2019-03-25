@@ -23,42 +23,20 @@ public class Cards extends Object implements Constants {
     //Class for all 52 cards in a deck.
     //Cards are named by Rank and then by Suit.
     private String faceName, suit;
-    private int rank;
+    private int value;
     private BufferedImage cardImage;
+    private Boolean usableCard;
+    private String owner;
 
     public Cards(String faceName, String suit, int rank, BufferedImage card) {
         this.suit = suit;
         this.faceName = faceName;
-        this.rank = rank;
+        this.value = value;
         this.cardImage = card;
     }
 
     public String toAString() {
         return " " + faceName + " of " + suit;
-    }
-
-    public static void main(String[] args) throws IOException {
-
-        String[] Deck = {"2C", "2D", "2H", "2S", 
-            "3C", "3D", "3H", "3S",
-            "4C", "4D", "4H", "4S", 
-            "5C", "5D", "5H", "5S", 
-            "6C", "6D", "6H", "6S", 
-            "7C", "7D", "7H", "7S", 
-            "8C", "8D", "8H", "8S", 
-            "9C", "9D", "9H", "9S", 
-            "1C", "1D", "1H", "1S", 
-            "AC", "AD", "AH", "AS", 
-            "JC", "JD", "JH", "JS", 
-            "QC", "QD", "QH", "QS", 
-            "KC", "KD", "KH", "KS"};
-        BufferedImage[] cardImages = new BufferedImage[52];
-        Cards[] cards = new Cards[52];
-        for (int i = 0; i < Deck.length; i++) {
-            cardImages[i] = makeImage(Deck[i]);
-            cards[i] = makeCard(Deck[i], cardImages[i]);
-            System.out.print(cards[i].toAString());
-        }
     }
 
     public static BufferedImage makeImage(String name) throws IOException {
@@ -196,32 +174,58 @@ public class Cards extends Object implements Constants {
         }
         return "o";
     }
-    
-    public static void shuffle(String cards[])
-    {
-        int n = cards.length;
-        Random random = new Random();
-        
-        for(int i=0;i<cards.length;i++)
-        {
-            int randomValue = i + random.nextInt(n-i);
-            String randomElement = cards[randomValue];
-            cards[randomValue] = cards[i];
-            cards[i] = randomElement;
-        }
+
+    public String getSuit() {
+        return suit;
     }
-    
-    public static void deal(String cards[])
-    {
-        //This would be done when the clients are added to send to each one.
-        //Once player class has been added, add these to individual client.
-        for(int i =0; i<4;i++)
-        {
-            System.out.println("Person " + (i +1) + " ");
-            for (int j = 0; i < 13; j++)
-            {
-                System.out.println(cards[i]);
-            }
-        }
+
+    public void setSuit(String suit) {
+        this.suit = suit;
     }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public Boolean isSmaller(Cards cards) {
+        if (this.value < cards.getValue()) {
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean isGreater(Cards cards) {
+        if (this.value > cards.getValue()) {
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean isHearts(Cards cards) {
+        if (this.getSuit() == "Hearts") {
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean getUsableCard() {
+        return usableCard;
+    }
+
+    public void setUsableCard(Boolean usableCard) {
+        this.usableCard = usableCard;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
 }
