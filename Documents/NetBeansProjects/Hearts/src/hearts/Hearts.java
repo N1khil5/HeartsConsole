@@ -34,11 +34,14 @@ import javafx.stage.Stage;
 import java.io.DataInputStream;
 import java.io.PrintStream;
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -56,12 +59,13 @@ public class Hearts extends Application implements Runnable {
     private Menu Menu;
     int portNumber = 2000;
     // The default host.
-    String host = "10.2.163.59";
+    String host = "localhost";
 
     // The client socket
     private static Socket clientSocket = null;
     // The output stream
-    private static PrintStream os = null;
+    private static OutputStream os = null;
+    private static DataOutputStream dos = null;
     // The input stream
     private static DataInputStream is = null;
 
@@ -189,10 +193,11 @@ public class Hearts extends Application implements Runnable {
             rules.setFont(Font.font("Cambria", 10));
 
             TextField Name = new TextField("Enter player name");
-
+            
             Button enter = new Button("Enter");
             enter.setOnAction(action -> {
-                connect();
+                String userName = Name.getText();
+                connect(userName);
                 System.out.println(Name.getText() + " has connected");
 
             });
@@ -289,8 +294,8 @@ public class Hearts extends Application implements Runnable {
     }
 
     public static void main(String[] args) {
-        MusicClientThread musicClientThread = new MusicClientThread();
-        musicClientThread.start();        
+        //MusicClientThread musicClientThread = new MusicClientThread();
+        //musicClientThread.start();        
         launch(args);
 //        //If everything has been initialized then we want to write some data to the socket we have opened a connection to on the port portNumber.
 //        if (clientSocket != null && os != null && is != null) {
@@ -330,16 +335,22 @@ public class Hearts extends Application implements Runnable {
         }
     }
 
-    public void connect() {
+    public void connect(String userName) {
         // The default port.
         int portNumber = 2000;
         // The default host.
-        String host = "10.2.163.59";
+        String host = "localhost";
         //Open a socket on a given host and port. Open input and output streams.
         try {
             clientSocket = new Socket(InetAddress.getByName(host), portNumber);
             //inputLine = new BufferedReader(new InputStreamReader(System.in));
-            os = new PrintStream(clientSocket.getOutputStream());
+            os = clientSocket.getOutputStream();
+            //PrintWriter pw = new PrintWriter(os);
+            dos = new DataOutputStream(os);
+            dos.writeUTF(userName);
+            dos.flush();
+            //pw.print(userName);
+            //pw.flush();
             is = new DataInputStream(clientSocket.getInputStream());
         } catch (UnknownHostException e) {
             System.err.println("Don't know about host " + host);
