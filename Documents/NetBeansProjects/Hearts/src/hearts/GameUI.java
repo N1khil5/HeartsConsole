@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 import java.util.*;
 import javafx.animation.*;
 import javafx.application.*;
-import static javafx.application.Application.*;
+import javafx.application.Application.*;
 import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.control.Button;
@@ -18,9 +18,54 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.*;
 import javafx.util.*;
+
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import javafx.application.Application;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.GaussianBlur;
+import javafx.scene.effect.Glow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import java.io.DataInputStream;
+import java.io.PrintStream;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -104,6 +149,8 @@ public class GameUI extends Application implements Runnable {
     private String my_id;
     private Boolean waiting_user = true;
     private Button player;
+    GridPane root = new GridPane();
+    private Players Players;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -123,28 +170,68 @@ public class GameUI extends Application implements Runnable {
         imgView.setFitHeight(600);
 
         //     Menu = new .Menu();
+        Players = new Players();
         javafx.scene.control.Label label1 = new javafx.scene.control.Label("Hearts");
-
-        root.getChildren().addAll(imgView);
+        root.getChildren().addAll(imgView, Players);
 
         scene = new Scene(root);
 
         primaryStage.setTitle("Hearts");
         primaryStage.setScene(scene);
         primaryStage.show();
-        
 
-
-        initA();
-        initB();
-        initC();
-        initD();
+//        initA();
+//        initB();
+//        initC();
+//        initD();
 //
 //        initNoti();
 //
 //        initChatPanel();
 //        initServerPanel();
+    }
 
+    private class Players extends Parent {
+
+        public Players() {
+            VBox players = new VBox(100);
+            players.setTranslateX(20);
+            players.setTranslateY(100);
+            Label player1 = new Label("Player 1");
+            player1.setFont(Font.font("Cambria", 17));
+            player1.setTextFill(Color.web("#FFFFFF"));
+            player1.setAlignment(Pos.CENTER);
+            player1.setLayoutX(20);
+            player1.setLayoutY(100);
+
+            Label player2 = new Label("Player 2");
+            player2.setFont(Font.font("Cambria", 17));
+            player2.setTextFill(Color.web("#FFFFFF"));
+            player2.setAlignment(Pos.CENTER);
+            player2.setLayoutX(40);
+            player2.setLayoutY(100);
+
+            Label player3 = new Label("Player 3");
+            player3.setFont(Font.font("Cambria", 17));
+            player3.setTextFill(Color.web("#FFFFFF"));
+            player3.setAlignment(Pos.CENTER);
+            player3.setLayoutX(60);
+            player3.setLayoutY(100);
+
+            Label player4 = new Label("Player 4");
+            player4.setFont(Font.font("Cambria", 17));
+            player4.setTextFill(Color.web("#FFFFFF"));
+            player4.setAlignment(Pos.CENTER);
+            player4.setLayoutX(80);
+            player4.setLayoutY(100);
+
+            Rectangle bg = new Rectangle(800, 600);
+            bg.setFill(Color.GREY);
+            bg.setOpacity(0.4);
+
+            players.getChildren().addAll(player1, player2, player3, player4);
+            getChildren().addAll(bg, players);
+        }
     }
 
 //    public String my_id() {
@@ -162,7 +249,6 @@ public class GameUI extends Application implements Runnable {
 //    public void waiting_user(Boolean waiting_user) {
 //        this.waiting_user = waiting_user;
 //    }
-
 //    public void ChatPanel() {
 //
 //        VBox messenger = new VBox();
@@ -170,7 +256,6 @@ public class GameUI extends Application implements Runnable {
 //        ScrollPane messages = new ScrollPane();
 //
 //    }
-
     @Override
     public void run() {
 
@@ -194,21 +279,34 @@ public class GameUI extends Application implements Runnable {
 
     }
 
-    private void initA() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void initB() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void initC() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void initD() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-
+//    private void initA() {
+//
+//        Label label = new Label("Player 1");
+//        label.setFont(Font.font("Cambria", 90));
+//        label.setTextFill(Color.web("#FFFFFF"));
+////        root.getChildren().addAll(imgView, label);
+//    }
+//
+//    private void initB() {
+//
+//        Label label = new Label("Player 2");
+//        label.setFont(Font.font("Cambria", 90));
+//        label.setTextFill(Color.web("#FFFFFF"));
+//        root.getChildren().addAll(label);
+//    }
+//
+//    private void initC() {
+//
+//        Label label = new Label("Player 3");
+//        label.setFont(Font.font("Cambria", 90));
+//        label.setTextFill(Color.web("#FFFFFF"));
+//        root.getChildren().addAll(label);
+//    }
+//
+//    private void initD() {
+//        Label label = new Label("Player 4");
+//        label.setFont(Font.font("Cambria", 90));
+//        label.setTextFill(Color.web("#FFFFFF"));
+//        root.getChildren().addAll(label);
+//    }
 }
