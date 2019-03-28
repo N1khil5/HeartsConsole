@@ -19,7 +19,7 @@ import java.util.Random;
  */
 public class gameLogic {
 
-    public static void shuffle(Cards cards[]) {   //MOVE TO GAME LOGIC
+    public static void shuffle(Cards cards[]) {
         int n = cards.length;
         Random random = new Random();
 
