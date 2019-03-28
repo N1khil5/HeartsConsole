@@ -52,12 +52,38 @@ public class Player {
     }
 
     public void get3Cards(Cards[] myHand) {
-        //my_list.addAll(list);
 
         for (Cards cards : myHand) {
             cards.setOwner(my_name);
             cards.setUsableCard(true);
         }
     }
+    
+    public void remove3Cards(Cards[] removeCards) {
 
+        int count = 0;
+        for (Cards removeC : removeCards) {
+            for (int i = 0; i < myHand.length; i++) {
+                if (myHand[i].getValue() ==removeC.getValue()) {
+                    count++;
+                    myHand[i].equals(null);
+                    break;
+                }
+            }
+        }
+        if(count !=3) {
+            System.out.println("Error removing 3 cards" + count);
+        }
+    }
+    
+    public Boolean isFirstPlayer() {
+        for (Cards cards : myHand) {
+            if (cards.isClubs2()) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    //public void update_rule(Boolean)
 }
