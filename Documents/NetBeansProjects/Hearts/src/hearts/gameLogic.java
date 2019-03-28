@@ -57,22 +57,5 @@ public class gameLogic {
         return cards;
     }
 
-    public Boolean isClubs2(Cards cards[]) {
-        for (int i = 0; i < cards.length; i++) {
-            if (cards[i].getSuit() == "Clubs" && cards[i].getValue() == 2) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public Boolean isQueenSpades(Cards cards[]) {
-        for (int i = 0; i < cards.length; i++) {
-            if (cards[i].getSuit() == "Spades" && cards[i].getValue() == 12) {
-                return true;
-            }
-        }
-        return false;
-    }
-
+    
 }

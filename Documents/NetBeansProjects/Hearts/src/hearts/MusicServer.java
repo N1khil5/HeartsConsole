@@ -15,10 +15,11 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  *
  * @author nzs52
  */
-public class MusicServer implements Constants {
+public class MusicServer extends Thread implements Constants{
 
-    public static void main(String[] args) {
-
+    //@Override
+    public void run() {
+        
         try {
             //Internet address of host
             InetSocketAddress hostAddress = new InetSocketAddress(hostName, httpPortNumber);
