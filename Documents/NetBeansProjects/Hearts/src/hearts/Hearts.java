@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hearts;
 
 import java.io.InputStream;
@@ -47,6 +42,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 
 /**
  *
@@ -193,14 +190,22 @@ public class Hearts extends Application implements Runnable {
             rules.setFont(Font.font("Cambria", 10));
 
             TextField Name = new TextField("Enter player name");
-            
+
             Button enter = new Button("Enter");
             enter.setOnAction(action -> {
                 String userName = Name.getText();
                 connect(userName);
                 System.out.println(Name.getText() + " has connected");
+                
+            }
+            );
 
-            });
+//            enter.setOnAction(new EventHandler<ActionEvent>(){
+//                @Override
+//                public void handle(ActionEvent event){
+//                    GameUI.main(args);
+//                }
+//            });
 
             //main menu
             menu0.getChildren().addAll(label, btnPlay, btnHelp, btnExit);
@@ -294,8 +299,8 @@ public class Hearts extends Application implements Runnable {
     }
 
     public static void main(String[] args) {
-        //MusicClientThread musicClientThread = new MusicClientThread();
-        //musicClientThread.start();        
+        MusicClientThread musicClientThread = new MusicClientThread();
+        musicClientThread.start();        
         launch(args);
 //        //If everything has been initialized then we want to write some data to the socket we have opened a connection to on the port portNumber.
 //        if (clientSocket != null && os != null && is != null) {
@@ -358,6 +363,8 @@ public class Hearts extends Application implements Runnable {
             System.err.println("Couldn't get I/O for the connection to the host "
                     + host);
         }
+        
+        GameUI runner = new GameUI();
 
         //If everything has been initialized then we want to write some data to the socket we have opened a connection to on the port portNumber.
 //        if (clientSocket != null && os != null && is != null) {
