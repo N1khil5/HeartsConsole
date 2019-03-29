@@ -175,6 +175,7 @@ public class GameUI extends Application implements Runnable {
         imgView.setFitWidth(800);
         imgView.setFitHeight(600);
 
+        Player[] nPlayer = new Player[4];
         //     Menu = new .Menu();
         Players = new Players();
         javafx.scene.control.Label label1 = new javafx.scene.control.Label("Hearts");
@@ -200,7 +201,8 @@ public class GameUI extends Application implements Runnable {
     private class Players extends Parent {
 
         public Players() {
-            VBox players = new VBox(35);
+            
+            VBox players = new VBox(100);
             players.setTranslateX(20);
             players.setTranslateY(100);
 

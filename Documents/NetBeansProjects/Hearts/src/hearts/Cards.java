@@ -223,4 +223,17 @@ public class Cards extends Object implements Constants {
         this.owner = owner;
     }
 
+    public Boolean isClubs2() {
+        if (this.getSuit() == "Clubs" && this.getValue() == 2) {
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean isQueenSpades() {
+        if (this.getSuit() == "Spades" && this.getValue() == 12) {
+            return true;
+        }
+        return false;
+    }
 }
