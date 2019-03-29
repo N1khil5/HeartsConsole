@@ -2,7 +2,6 @@ package hearts;
 
 import java.net.*;
 import java.io.*;
-
 import java.nio.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -23,7 +22,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.*;
 import javafx.util.*;
-
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -66,6 +64,12 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 
 /**
  *
@@ -199,12 +203,21 @@ public class GameUI extends Application implements Runnable {
             VBox players = new VBox(100);
             players.setTranslateX(20);
             players.setTranslateY(100);
+
             Label player1 = new Label("Player 1");
             player1.setFont(Font.font("Cambria", 17));
             player1.setTextFill(Color.web("#FFFFFF"));
             player1.setAlignment(Pos.CENTER);
             player1.setLayoutX(20);
             player1.setLayoutY(100);
+
+            Label player1Score = new Label("0/0");
+            player1Score.setAlignment(Pos.CENTER);
+            player1Score.setBorder(new Border(new BorderStroke(Color.ORANGE, BorderStrokeStyle.SOLID, null, new BorderWidths(2))));
+            player1Score.setFont(Font.font("Cambria", 17));
+            player1Score.setBackground(Background.EMPTY);
+            player1Score.setLayoutX(20);
+            player1Score.setLayoutY(100);
 
             Label player2 = new Label("Player 2");
             player2.setFont(Font.font("Cambria", 17));
@@ -213,12 +226,28 @@ public class GameUI extends Application implements Runnable {
             player2.setLayoutX(40);
             player2.setLayoutY(100);
 
+            Label player2Score = new Label("0/0");
+            player2Score.setAlignment(Pos.CENTER);
+            player2Score.setBorder(new Border(new BorderStroke(Color.ORANGE, BorderStrokeStyle.SOLID, null, new BorderWidths(2))));
+            player2Score.setFont(Font.font("Cambria", 17));
+            player2Score.setBackground(Background.EMPTY);
+            player2Score.setLayoutX(40);
+            player2Score.setLayoutY(100);
+
             Label player3 = new Label("Player 3");
             player3.setFont(Font.font("Cambria", 17));
             player3.setTextFill(Color.web("#FFFFFF"));
             player3.setAlignment(Pos.CENTER);
             player3.setLayoutX(60);
             player3.setLayoutY(100);
+
+            Label player3Score = new Label("0/0");
+            player3Score.setAlignment(Pos.CENTER);
+            player3Score.setBorder(new Border(new BorderStroke(Color.ORANGE, BorderStrokeStyle.SOLID, null, new BorderWidths(2))));
+            player3Score.setFont(Font.font("Cambria", 17));
+            player3Score.setBackground(Background.EMPTY);
+            player3Score.setLayoutX(60);
+            player3Score.setLayoutY(100);
 
             Label player4 = new Label("Player 4");
             player4.setFont(Font.font("Cambria", 17));
@@ -227,11 +256,19 @@ public class GameUI extends Application implements Runnable {
             player4.setLayoutX(80);
             player4.setLayoutY(100);
 
+            Label player4Score = new Label("0/0");
+            player4Score.setAlignment(Pos.CENTER);
+            player4Score.setBorder(new Border(new BorderStroke(Color.ORANGE, BorderStrokeStyle.SOLID, null, new BorderWidths(2))));
+            player4Score.setFont(Font.font("Cambria", 17));
+            player4Score.setBackground(Background.EMPTY);
+            player4Score.setLayoutX(80);
+            player4Score.setLayoutY(100);
+
             Rectangle bg = new Rectangle(800, 600);
             bg.setFill(Color.GREY);
             bg.setOpacity(0.4);
 
-            players.getChildren().addAll(player1, player2, player3, player4);
+            players.getChildren().addAll(player1, player1Score, player2, player2Score, player3, player3Score, player4, player4Score);
             getChildren().addAll(bg, players);
         }
     }
