@@ -15,7 +15,7 @@ public interface Constants {
     final static String httpContext = "/MusicServer";
     
     //Path to the music file that is streamed
-    final static String musicFilePath = "audio/Singham.wav";
+    final static String musicFilePath = "audio\\Singham.wav";
     
     //Used to determine the size of the buffer 
     final static int numberOfFrames = 4096;
