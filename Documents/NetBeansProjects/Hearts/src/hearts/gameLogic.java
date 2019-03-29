@@ -11,6 +11,7 @@ import static hearts.Cards.makeCard;
 import static hearts.Cards.makeImage;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -31,7 +32,7 @@ public class gameLogic {
         }
     }
 
-    public static Cards[] deal() throws IOException {
+    public static Cards[] deal(Player[] nPlayer) throws IOException {
 
         String[] Deck = {"2C", "2D", "2H", "2S",
             "3C", "3D", "3H", "3S",
@@ -54,8 +55,23 @@ public class gameLogic {
             System.out.print(cards[i].toAString());
         }
         shuffle(cards);
+        for(int i =0; i<cards.length; i++){
+            if(i <13){
+            cards[i].setOwner(nPlayer[0].getMy_name());                
+            }
+            else if(i>12 && i <26){
+                cards[i].setOwner(nPlayer[1].getMy_name());
+            }
+            else if(i>25 && i <39){
+                cards[i].setOwner(nPlayer[2].getMy_name());
+            }
+            else {
+                cards[i].setOwner(nPlayer[3].getMy_name());
+            }
+        }
         return cards;
     }
+    
 
     
 }
